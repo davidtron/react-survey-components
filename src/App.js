@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+import Survey from "./containers/Survey";
+
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+
+        // TODO - load questions from API based on surveyId (so we can version them
+        // TODO - load answers if we have any saved
+
+
+    }
+
+    render() {
+        return (
+            <Survey/>
+        );
+    }
 }
 
-export default App;
