@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import RadioAnswers from '../components/RadioAnswers'
 import TextAnswer from '../components/TextAnswer'
-import {Button, Col, Form, FormGroup, Container} from 'reactstrap';
+import {Button, Col, Form, FormGroup, Container, ButtonGroup} from 'reactstrap';
 import update from 'immutability-helper';
 
 
@@ -79,23 +79,23 @@ export default class Page extends Component {
                     {this.renderQuestions(this.pageData.questions)}
 
                     <FormGroup inline row>
+                        <ButtonGroup sm={{offset: 0}}>
 
-                        <Col sm={{offset: 0}}>
+
                             {this.previous !== null ?
                                 <Button disabled={this.unansweredQuestions()}
                                         onClick={() => this.handleSubmit(this.previous)}>Previous</Button>
-                                : <div/>
+                                : null
                             }
-                        </Col>
-                        <Col >
+
                             {this.next !== null ?
                                 <Button disabled={this.unansweredQuestions()}
                                         onClick={() => this.handleSubmit(this.next)}>Next</Button>
                                 :
                                 <Button disabled={this.unansweredQuestions()}
-                                        onClick={() => this.handleSubmit(this.quit)}>Quit</Button>
+                                        onClick={() => this.handleSubmit(this.quit)}>Complete</Button>
                             }
-                        </Col>
+                        </ButtonGroup>
                     </FormGroup>
                 </Form>
             </Container>
