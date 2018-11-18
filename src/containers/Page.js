@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 
 import RadioAnswers from '../components/RadioAnswers'
-import TextAnswer from '../components/TextAnswer'
+import TextAreaAnswer from '../components/TextAreaAnswer'
+import TextBoxAnswer from '../components/TextBoxAnswer'
 import {Button, Col, Form, FormGroup, Container, ButtonGroup} from 'reactstrap';
 import update from 'immutability-helper';
 
@@ -33,6 +34,10 @@ export default class Page extends Component {
         callbackWith(result);
     };
 
+    preventEnter = event => {
+        event.preventDefault();
+    };
+
     handleChange = async event => {
         const updatedAnswers = update(this.state.answers, {[event.target.name]: {$set: event.target.value}});
         this.setState({answers: updatedAnswers});
@@ -59,7 +64,10 @@ export default class Page extends Component {
                                      answers={question.answers} selectedAnswer={this.state.answers[question.questionId]}
                                      inline/>
             } else if (question.type === 'textarea') {
-                return <TextAnswer key={i} questionId={question.questionId} question={question.question}
+                return <TextAreaAnswer key={i} questionId={question.questionId} question={question.question}
+                                   answer={this.state.answers[question.questionId]}/>
+            } else if (question.type === 'text') {
+                return <TextBoxAnswer key={i} questionId={question.questionId} question={question.question}
                                    answer={this.state.answers[question.questionId]}/>
             }
             return <div>no questions</div>
@@ -69,22 +77,19 @@ export default class Page extends Component {
     render() {
 
 
-        // TODO - layout of page,
         return (
             <Container>
                 <h2>{this.pageData.title}</h2>
                 <p>{this.pageData.description}</p>
-                <Form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+                <Form onSubmit={this.preventEnter} onChange={this.handleChange}>
 
                     {this.renderQuestions(this.pageData.questions)}
 
                     <FormGroup inline row>
                         <ButtonGroup sm={{offset: 0}}>
 
-
                             {this.previous !== null ?
-                                <Button disabled={this.unansweredQuestions()}
-                                        onClick={() => this.handleSubmit(this.previous)}>Previous</Button>
+                                <Button onClick={() => this.handleSubmit(this.previous)}>Previous</Button>
                                 : null
                             }
 

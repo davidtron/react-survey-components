@@ -17,19 +17,36 @@ export default class Survey extends Component {
             pages: [
                 {
                     pageId: "p1",
-                    title: "Information Governance - page 1",
-                    description: "This is some help text",
+                    title: "2018",
+                    description: "This is the description",
                     questions: [
                         {
                             questionId: "p1q1",
-                            type: "radio",
-                            question: "Do you store your users data securely?",
-                            answers: ["yes", "partly", "slightly", "no"]
+                            type: "text",
+                            question: "Test",
                         },
                         {
                             questionId: "p1q2",
                             type: "textarea",
-                            question: "Fill in some text",
+                            question: "Test area",
+                        },
+                    ]
+                },
+                {
+                    pageId: "p2",
+                    title: "Information Governance",
+                    description: "This is some help text",
+                    questions: [
+                        {
+                            questionId: "p2q1",
+                            type: "radio",
+                            question: "Do you store your users' data securely either on your systems or in the cloud?",
+                            answers: ["yes", "partly", "slightly", "no"]
+                        },
+                        {
+                            questionId: "p2q2",
+                            type: "textarea",
+                            question: "Notes",
                         },
                     ]
                 },
@@ -95,11 +112,12 @@ export default class Survey extends Component {
         return answers;
     };
 
-    quitPage = event => {
-        console.log("Quit page pressed");
+    quitPage = answersSubmitted => {
+        console.log("Complete page pressed");
+        this.saveSubmittedAnswers(answersSubmitted);
 
-        console.log(event);
-        //this.setState({currentPage: 0});
+        // TODO - now what?
+
     };
 
     previousPage = answersSubmitted => {
@@ -141,8 +159,8 @@ export default class Survey extends Component {
         let pageData = this.json.pages[currentPage];
         let answers = this.state.answers[pageData.pageId];
 
-        console.log("Current page is ", currentPage);
-        console.log("Using answers : ",answers);
+        // console.log("Current page is ", currentPage);
+        // console.log("Using answers : ",answers);
 
         return (
             <Container>
