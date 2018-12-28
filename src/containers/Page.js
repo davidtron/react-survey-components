@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import RadioAnswers from '../components/RadioAnswers'
 import TextAreaAnswer from '../components/TextAreaAnswer'
 import TextBoxAnswer from '../components/TextBoxAnswer'
-import {Button, Col, Form, FormGroup, Container, ButtonGroup} from 'reactstrap';
+import {Button, Form, FormGroup, Container, ButtonGroup} from 'reactstrap';
 import update from 'immutability-helper';
 
 

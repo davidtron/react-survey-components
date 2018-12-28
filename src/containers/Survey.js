@@ -13,7 +13,9 @@ export default class Survey extends Component {
         // TODO - load questions from API based on surveyId (so we can version them
         // TODO - load answers if we have any saved
 
+
         this.json = {
+            auditId: "auditNumber1",
             pages: [
                 {
                     pageId: "p1",
