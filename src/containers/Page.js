@@ -74,14 +74,14 @@ export default class Page extends Component {
     renderQuestions = questions => {
         return questions.map((question, i) => {
             if (question.type === 'radio') {
-                return <RadioAnswers key={i} questionId={question.questionId} question={question.question}
+                return <RadioAnswers key={i} questionId={question.questionId} question={question.question} required={question.required}
                                      answers={question.answers} selectedAnswer={this.state.answers[question.questionId]}
                                      inline/>
             } else if (question.type === 'textarea') {
-                return <TextAreaAnswer key={i} questionId={question.questionId} question={question.question}
+                return <TextAreaAnswer key={i} questionId={question.questionId} question={question.question} required={question.required}
                                    answer={this.state.answers[question.questionId]}/>
             } else if (question.type === 'text') {
-                return <TextBoxAnswer key={i} questionId={question.questionId} question={question.question}
+                return <TextBoxAnswer key={i} questionId={question.questionId} question={question.question} required={question.required}
                                    answer={this.state.answers[question.questionId]}/>
             }
             return <div>no questions</div>
