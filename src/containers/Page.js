@@ -5,6 +5,7 @@ import TextAreaAnswer from '../components/TextAreaAnswer'
 import TextBoxAnswer from '../components/TextBoxAnswer'
 import {Button, Form, FormGroup, Container, ButtonGroup} from 'reactstrap';
 import update from 'immutability-helper';
+import Paragraphs from '../components/Paragraphs';
 
 
 export default class Page extends Component {
@@ -43,13 +44,26 @@ export default class Page extends Component {
         this.setState({answers: updatedAnswers});
     };
 
+    getQuestionFromId = (questionId) => {
+        const matchedQuestions = this.pageData.questions.filter(question => question.questionId === questionId);
+        if(matchedQuestions.length !== 1) {
+            throw new Error("Could not find single question matching question id " + questionId + " from " + JSON.stringify(this.pageData));
+        }
+
+        return matchedQuestions[0];
+    };
+
     unansweredQuestions = () => {
         // if any of the answers is empty then we return true
         let questionIds = Object.keys(this.state.answers);
         let unansweredQuestion = false;
 
+
         questionIds.forEach(questionId => {
-            if (this.state.answers[questionId] === "") {
+            // Check if question needs answer
+
+            const question = this.getQuestionFromId(questionId);
+            if (question.required && this.state.answers[questionId] === "") {
                 unansweredQuestion = true;
             }
         });
@@ -80,7 +94,7 @@ export default class Page extends Component {
         return (
             <Container>
                 <h2>{this.pageData.title}</h2>
-                <p>{this.pageData.description}</p>
+                <Paragraphs input={this.pageData.description} />
                 <Form onSubmit={this.preventEnter} onChange={this.handleChange}>
 
                     {this.renderQuestions(this.pageData.questions)}

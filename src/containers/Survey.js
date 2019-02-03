@@ -10,10 +10,6 @@ export default class Survey extends Component {
     constructor(props) {
         super(props);
 
-        // TODO - load questions from API based on surveyId (so we can version them
-        // TODO - load answers if we have any saved
-
-
         this.json = {
             auditId: "auditNumber1",
             pages: [
@@ -26,6 +22,7 @@ export default class Survey extends Component {
                             questionId: "p1q1",
                             type: "text",
                             question: "Test",
+                            required: true
                         },
                         {
                             questionId: "p1q2",
@@ -43,24 +40,13 @@ export default class Survey extends Component {
                             questionId: "p2q1",
                             type: "radio",
                             question: "Do you store your users' data securely either on your systems or in the cloud?",
-                            answers: ["yes", "partly", "slightly", "no"]
+                            answers: ["yes", "partly", "slightly", "no"],
+                            required: true
                         },
                         {
                             questionId: "p2q2",
                             type: "textarea",
                             question: "Notes",
-                        },
-                    ]
-                },
-                {
-                    pageId: "p2",
-                    title: "Page 2",
-                    description: "This is page 2",
-                    questions: [
-                        {
-                            questionId: "p2q1",
-                            type: "textarea",
-                            question: "Fill in some text",
                         },
                     ]
                 },
@@ -73,6 +59,7 @@ export default class Survey extends Component {
                             questionId: "p3q1",
                             type: "textarea",
                             question: "Final page, whats your thoughts?",
+                            required: true
                         },
                     ]
                 }
