@@ -48,6 +48,13 @@ export default class Survey extends Component {
                             type: "textarea",
                             question: "Notes",
                         },
+                        {
+                            questionId: "p2q3",
+                            type: "select",
+                            question: "Are these the droids you are looking for?",
+                            answers: ["yes", "partly", "slightly", "no"],
+                            required: true
+                        }
                     ]
                 },
                 {
@@ -67,17 +74,11 @@ export default class Survey extends Component {
         };
 
         // load answers from db or generate empty answers to passthrough
-
-        /*
-        Generate answers state for all questions
-
-         */
-
-        const a = this.emptyAnswersForPages(this.json.pages);
+        const answers = this.emptyAnswersForPages(this.json.pages);
 
         this.state = {
             currentPage: 0,
-            answers: a
+            answers: answers
         };
     }
 
@@ -104,9 +105,6 @@ export default class Survey extends Component {
     quitPage = answersSubmitted => {
         console.log("Complete page pressed");
         this.saveSubmittedAnswers(answersSubmitted);
-
-        // TODO - now what?
-
     };
 
     previousPage = answersSubmitted => {

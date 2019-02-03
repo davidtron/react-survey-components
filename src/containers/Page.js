@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import RadioAnswers from '../components/RadioAnswers'
 import TextAreaAnswer from '../components/TextAreaAnswer'
 import TextBoxAnswer from '../components/TextBoxAnswer'
+import SelectAnswers from '../components/SelectAnswers'
 import {Button, Form, FormGroup, Container, ButtonGroup} from 'reactstrap';
 import update from 'immutability-helper';
 import Paragraphs from '../components/Paragraphs';
@@ -83,6 +84,10 @@ export default class Page extends Component {
             } else if (question.type === 'text') {
                 return <TextBoxAnswer key={i} questionId={question.questionId} question={question.question} required={question.required}
                                    answer={this.state.answers[question.questionId]}/>
+            } else if (question.type === 'select') {
+                return <SelectAnswers key={i} questionId={question.questionId} question={question.question} required={question.required}
+                                     answers={question.answers} selectedAnswer={this.state.answers[question.questionId]}
+                                     inline/>
             }
             return <div>no questions</div>
         });
